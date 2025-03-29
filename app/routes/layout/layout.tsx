@@ -45,10 +45,10 @@ export default function Layout() {
       {/* ICON PACK DITENGAH HEADER */}
       <IconContainer />
       <div className="flex flex-col md:flex-row items-center md:items-start gap-6 px-6 mt-10">
-        {/* KIRI: Avatar Profile */}
+        {/* KIRI: PROFILE */}
         <AvatarFotoProfile />
 
-        {/* KANAN: UNTUK KETERANGAN ATAU INFORMASI */}
+        {/* KANAN: ------ */}
         <div className="flex-1">
           <div className="bg-white shadow-lg rounded-lg p-6 relative -mt-3">
             <h2 className="text-2xl font-semibold text-gray-800">Judul Konten</h2>
@@ -59,7 +59,6 @@ export default function Layout() {
         </div>
       </div>
 
-      {/* Konten Setelah Header */}
       <div className="p-6 text-center">
         <p className="text-gray-700">Selamat datang di website kami! Nikmati pengalaman terbaik.</p>
       </div>

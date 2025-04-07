@@ -6,6 +6,6 @@ interface TabsStore {
 };
 
 export const useTabsLayoutStore = create<TabsStore>((set) => ({
-  activeTab: "account",
+  activeTab: "beranda",
   setActiveTab: (tab) => set({ activeTab: tab }),
 }));

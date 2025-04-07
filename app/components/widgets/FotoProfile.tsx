@@ -22,8 +22,8 @@ const AvatarFotoProfile = () => {
   };
 
   return (
-    <div className="w-full md:max-w-[200px] lg:max-w-sm">
-      <div className="relative -mt-3 lg:-mt-3 bg-white shadow-lg rounded-lg overflow-hidden">
+    <div className="w-full md:max-w-[200px] md:min-w-[200px] lg:max-w-sm lg:min-w-sm">
+      <div className="relative bg-white shadow-lg rounded-lg overflow-hidden">
         {/* THUMBNAIL/ FOTO SAMPUL */}
         <div className="w-full h-28 md:h-24 lg:h-36 bg-gray-300 relative">
           {coverImage ? (
@@ -53,11 +53,9 @@ const AvatarFotoProfile = () => {
         {/* KONTEN PROFILE */}
         <div className="pt-16 lg:pt-20 pb-6 px-6 flex flex-col items-center text-center">
           <p className="text-gray-600 text-xs lg:text-sm font-semibold">Muhammad Hamzah Sya'bani A.J.R.S S.Ag</p>
-          <p className="text-gray-600 text-[11px] lg:text-xs font-semibold">Direktur Umum</p>
-
-          <p className="text-gray-500 mt-2 text-[11px] lg:text-xs italic">
-            Muslim yang bekerja keras, bukan sekadar mencari nafkah, tapi juga mengukir keberkahan
-          </p>
+          <p className="text-gray-600 text-[11px] lg:text-xs font-semibold">NIP 12361827381926</p>
+          <p className="text-gray-500 mt-2 text-[11px] lg:text-xs italic">Direktur Umum</p>
+          <p className="text-gray-500 text-[11px] lg:text-xs italic">Badan Riset dan Inovasi Nasional (BRIN)</p>
         </div>
       </div>
       {/* <div className="bg-white shadow-lg rounded-lg p-6 relative -mt-3 flex flex-col items-center">

@@ -1,19 +1,30 @@
 import IconContainer from "~/components/widgets/OverlayHeader";
-import type { Route } from "./+types/layout";
+import type { Route } from "./+types/";
 import bgImage from "~/assets/images/bg-new.jpg";
+import { ConfigsLanguange } from "~/lib/config";
 import AvatarFotoProfile from "~/components/widgets/FotoProfile";
-import { useEffect, useState } from "react";
-import { ConfigsApp } from "~/lib/config";
+import React, { useEffect, useState } from "react";
 import { BreadcrumbCustomV1 } from "~/components/widgets/Breadcrumbs/BreadcrumbCustom";
 import { TabsCustomV1 } from "~/components/widgets/Tabs/TabsCustom";
 import { useTabsLayoutStore } from "~/store/Tabs/TabsLayoutStore";
+import TabsHomeBeranda from "./components/tabsHomeComp/TabsBeranda";
+import TabsHomeProfile from "./components/tabsHomeComp/TabsProfile";
+import FooterParent from "~/components/footer/FooterParent";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Beranda" },
+    { title: "JAGRITA" },
     { name: "description", content: "Selamat datang diberanda" },
   ];
 }
+
+type TabTriggerV1 = {
+  tabsTriggerValue: string;
+  tabsTriggerTitle: string;
+};
+type TabContentV1 = {
+  tabsContent: React.ReactNode;
+};
 
 export default function Layout() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -21,7 +32,10 @@ export default function Layout() {
   const breadcrumb_data = [
     { title: activeTab, link: "/" },
   ];
-
+  const [itemsTabsV1, setItemTabsV1] = useState<TabTriggerV1[]>([]);
+  const [itemTabsContentV1, setItemTabsContentV1] = useState<TabContentV1[]>([]);
+  
+  // HANDLE VARIASI ANIMASI SCROLL UNTUK MERUBAH TEKS HEADER JUMBOTRON
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -30,30 +44,29 @@ export default function Layout() {
         setIsScrolled(false);
       }
     };
-    console.log(import.meta.env.VITE_API_URL, "testing ENV")
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    // console.log(import.meta.env.VITE_API_URL, "testing ENV")
+    const xItemsTab = [
+      { tabsTriggerValue: 'beranda', tabsTriggerTitle: 'Beranda', },
+      { tabsTriggerValue: 'profile', tabsTriggerTitle: 'Profile', },
+    ];
+    setItemTabsV1(xItemsTab);
+    const xItemTabTrigger = [
+      { tabsContent: <TabsHomeBeranda /> },
+      { tabsContent: <TabsHomeProfile /> },
+      
+    ];
+    setItemTabsContentV1(xItemTabTrigger);
   }, []);
 
   return (
     <div className="min-h-screen">
       {/* HEADER JUMBOTRON */}
-      <div className="w-full h-[400px] relative">
-        <img src={bgImage} alt="Jumbotron" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center">
-          <div className="absolute top-4 left-4 flex items-center gap-2">
-            {/* <img src={logoImage} alt="Logo" className="w-8 h-8 sm:w-10 sm:h-10" /> */}
-            <span className="text-white text-lg sm:text-xl font-bold tracking-wide">JAGRITA</span>
-          </div>
-          <h1 className={`text-white text-center text-4xl font-bold transition-all duration-500 ease-in-out ${isScrolled ? "opacity-0 translate-y-[-20px]" : "opacity-100 translate-y-0"}`}>
-            {ConfigsApp.title_jumbotron}<br />{ConfigsApp.title_jumbotron_sub}
-          </h1>
-          <h1 className={`text-white text-center text-4xl font-bold transition-all duration-500 ease-in-out mt-4 ${isScrolled ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[20px]"}`}>
-            {ConfigsApp.title_jumbotron_welcome} Hamzah...
-          </h1>
-        </div>
-      </div>
+      
       
       {/* ICON PACK DITENGAH HEADER */}
       <IconContainer />
@@ -62,7 +75,7 @@ export default function Layout() {
         <AvatarFotoProfile />
 
         {/* KANAN: ------ */}
-        <div className="flex-1">
+        <div className="w-full md:flex-1">
           <div className="relative -mt-3 mb-2">
             <BreadcrumbCustomV1 
               classLinkCustom="text-xs text-white hover:text-gray-500 transition-all duration-300 ease-in-out" 
@@ -71,7 +84,8 @@ export default function Layout() {
             />
           </div>
           <div className="bg-white shadow-lg rounded-lg relative">
-            <TabsCustomV1 />
+            <TabsCustomV1 tabsTrigger={itemsTabsV1} tabsContent={itemTabsContentV1} />
+            
             {/* <h2 className="text-2xl font-semibold text-gray-800">JAGRITA</h2>
             <p className="text-gray-600 mt-2">
               Ini adalah konten utama yang berada dalam card dan sedikit menumpuk ke dalam header.
@@ -83,6 +97,7 @@ export default function Layout() {
       <div className="p-6 text-center">
         <p className="text-gray-700">Selamat datang di website kami! Nikmati pengalaman terbaik.</p>
       </div>
+      <FooterParent />
     </div>
   );
 }
